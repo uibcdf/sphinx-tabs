@@ -1,3 +1,3 @@
-echo "Building"
-$PYTHON -m pip install --no-deps .
-echo "Done"
+set -eux
+
+$PYTHON -m pip install . --no-deps --no-build-isolation -vv

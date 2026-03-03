@@ -1,27 +1,35 @@
-# Instructions
+# Build and Upload (`sphinx-tabs`)
 
-## Conda packages required
+## Prerequisites
 
 ```bash
-conda install anaconda-client conda-build
+conda install -c conda-forge conda-build anaconda-client
 ```
 
-## Building and pushing to https://anaconda.org/uibcdf
+## Build package
+
+Run from repository root:
 
 ```bash
-conda config --set anaconda_upload no
-conda build .
-PACKAGE_OUTPUT=`conda build . --output`
+conda build devtools/conda-build
+```
+
+Get the built package path:
+
+```bash
+conda build devtools/conda-build --output
+```
+
+## Upload to `uibcdf`
+
+```bash
 anaconda login
-anaconda upload --user uibcdf $PACKAGE_OUTPUT --label main #label:main, dev, tests
-conda build purge
+anaconda upload --user uibcdf <PACKAGE_PATH> --label main
 anaconda logout
 ```
-## Install
 
-```
-conda install -c uibcdf depdigest
-```
+## Install from channel
 
-## Additional Info
-https://docs.anaconda.com/anaconda-cloud/user-guide/tasks/work-with-packages
+```bash
+conda install -c uibcdf sphinx-tabs
+```
